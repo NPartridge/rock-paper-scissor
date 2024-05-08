@@ -18,7 +18,6 @@ function getComputerChoice()
 	return sign;
 }
 
-console.log(getComputerChoice());
 
 function getHumanChoice()
 {
@@ -27,4 +26,6 @@ function getHumanChoice()
 	return choice.toLowerCase();
 }
 
-console.log(getHumanChoice());
+
+let humanScore = 0;
+let computerScore = 0;
