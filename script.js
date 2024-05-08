@@ -18,3 +18,13 @@ function getComputerChoice()
 	return sign;
 }
 
+console.log(getComputerChoice());
+
+function getHumanChoice()
+{
+	const choice = prompt('Rock, Paper, or Scissors?')
+
+	return choice.toLowerCase();
+}
+
+console.log(getHumanChoice());
