@@ -27,5 +27,40 @@ function getHumanChoice()
 }
 
 
+function playRound(humanChoice, computerChoice)
+{
+	if (
+		humanChoice == 'rock' && computerChoice == 'paper' ||
+		humanChoice == 'paper' && computerChoice == 'scissors' ||
+		humanChoice == 'scissors' && computerChoice == 'rock'
+		)
+	{
+		// capitalize computer choice
+		computerChoice = computerChoice.slice(0, 1).toUpperCase() + computerChoice.slice(1,);
+		console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+		computerScore++;
+	}
+	else if (
+		humanChoice == 'rock' && computerChoice == 'scissors' ||
+		humanChoice == 'paper' && computerChoice == 'rock' ||
+		humanChoice == 'scissors' && computerChoice == 'paper'
+		)
+	{
+		// capitalize human choice
+		humanChoice = humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1,);
+		console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+		humanScore++;
+	}
+	else
+	{
+		console.log('It\'s a draw!');
+	}
+}
+
 let humanScore = 0;
 let computerScore = 0;
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
