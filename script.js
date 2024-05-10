@@ -27,40 +27,50 @@ function getHumanChoice()
 }
 
 
-function playRound(humanChoice, computerChoice)
-{
-	if (
-		humanChoice == 'rock' && computerChoice == 'paper' ||
-		humanChoice == 'paper' && computerChoice == 'scissors' ||
-		humanChoice == 'scissors' && computerChoice == 'rock'
-		)
+function playGame(){
+
+	let humanScore = 0;
+	let computerScore = 0;
+	let count = 0;
+
+	function playRound(humanChoice, computerChoice)
 	{
-		// capitalize computer choice
-		computerChoice = computerChoice.slice(0, 1).toUpperCase() + computerChoice.slice(1,);
-		console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-		computerScore++;
+		if (
+			humanChoice == 'rock' && computerChoice == 'paper' ||
+			humanChoice == 'paper' && computerChoice == 'scissors' ||
+			humanChoice == 'scissors' && computerChoice == 'rock'
+			)
+		{
+			computerChoice = computerChoice.slice(0, 1).toUpperCase() + computerChoice.slice(1,);
+			console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+			computerScore++;
+		}
+		else if (
+			humanChoice == 'rock' && computerChoice == 'scissors' ||
+			humanChoice == 'paper' && computerChoice == 'rock' ||
+			humanChoice == 'scissors' && computerChoice == 'paper'
+			)
+		{
+			humanChoice = humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1,);
+			console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+			humanScore++;
+		}
+		else
+		{
+			console.log('It\'s a draw!');
+		}
 	}
-	else if (
-		humanChoice == 'rock' && computerChoice == 'scissors' ||
-		humanChoice == 'paper' && computerChoice == 'rock' ||
-		humanChoice == 'scissors' && computerChoice == 'paper'
-		)
+
+	while (count < 5)
 	{
-		// capitalize human choice
-		humanChoice = humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1,);
-		console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-		humanScore++;
+		const humanSelection = getHumanChoice();
+		const computerSelection = getComputerChoice();
+		playRound(humanSelection, computerSelection);
+		count++;
 	}
-	else
-	{
-		console.log('It\'s a draw!');
-	}
+
+	console.log(`Player Score: ${humanScore} | Computer Score: ${computerScore}`);
 }
 
-let humanScore = 0;
-let computerScore = 0;
+playGame();
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
