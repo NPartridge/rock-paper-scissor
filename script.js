@@ -19,19 +19,18 @@ function getComputerChoice()
 }
 
 
-function getHumanChoice()
-{
-	const choice = prompt('Rock, Paper, or Scissors?')
-
-	return choice.toLowerCase();
-}
-
-
 function playGame(){
 
 	let humanScore = 0;
 	let computerScore = 0;
-	let count = 0;
+
+	const resultContainer = document.querySelector('#resultContainer');
+
+	const para = document.createElement('p');
+	resultContainer.appendChild(para);
+
+	const scoreText = document.createElement('p');
+	resultContainer.appendChild(scoreText);
 
 	function playRound(humanChoice, computerChoice)
 	{
@@ -42,7 +41,7 @@ function playGame(){
 			)
 		{
 			computerChoice = computerChoice.slice(0, 1).toUpperCase() + computerChoice.slice(1,);
-			console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+			para.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
 			computerScore++;
 		}
 		else if (
@@ -52,24 +51,36 @@ function playGame(){
 			)
 		{
 			humanChoice = humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1,);
-			console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+			para.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
 			humanScore++;
 		}
 		else
 		{
-			console.log('It\'s a draw!');
+			para.textContent = 'It\'s a draw!';
+		}
+
+		if (+humanScore == 5 || +computerScore == 5){
+			const winner = +humanScore > +computerScore? 'player': 'computer';
+			scoreText.textContent = `The winner is ${winner}!`;
+		}
+		else{
+			scoreText.textContent = `Player Score: ${humanScore} | Computer Score: ${computerScore}`;
 		}
 	}
 
-	while (count < 5)
-	{
-		const humanSelection = getHumanChoice();
-		const computerSelection = getComputerChoice();
-		playRound(humanSelection, computerSelection);
-		count++;
-	}
+	const buttons = document.querySelectorAll("button");
 
-	console.log(`Player Score: ${humanScore} | Computer Score: ${computerScore}`);
+	buttons.forEach((button) => {
+		button.addEventListener("click", () => {
+			const humanSelection = button.textContent.toLowerCase();
+			const computerSelection = getComputerChoice();
+			playRound(humanSelection, computerSelection);
+		})
+	})
+
+	
+	
+	
 }
 
 playGame();
